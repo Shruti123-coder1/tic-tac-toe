@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Tic Tac Toe</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<div class="glass-card">
+    <h1>❌ Tic Tac Toe ⭕</h1>
+
+    {% if winner %}
+        <div class="status win">
+            {% if winner == "Draw" %}
+                🤝 It's a Draw!
+            {% else %}
+                🎉 Player {{ winner }} Wins!
+            {% endif %}
+        </div>
+    {% else %}
+        <div class="status">
+            Turn: <span>{{ current_player }}</span>
+        </div>
+    {% endif %}
+
+    <form method="POST">
+        <div class="board">
+            {% for i in range(9) %}
+                <button class="cell" name="cell" value="{{ i }}"
+                        {% if winner %}disabled{% endif %}>
+                    {{ board[i] }}
+                </button>
+            {% endfor %}
+        </div>
+    </form>
+
+    <!-- Play Again button ALWAYS visible -->
+    <form method="POST" action="/reset">
+        <button class="btn">🔁 Play Again</button>
+    </form>
+</div>
+
+<footer>Made with Python • Flask • HTML • CSS</footer>
+
+</body>
+</html>

@@ -1,0 +1,110 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    height: 100vh;
+    background: radial-gradient(circle at top, #1d2671, #c33764);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: white;
+}
+
+/* Glass Card */
+.glass-card {
+    backdrop-filter: blur(15px);
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    padding: 30px 35px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    text-align: center;
+    animation: fadeIn 1s ease;
+}
+
+h1 {
+    margin-bottom: 15px;
+    text-shadow: 0 0 10px rgba(255,255,255,0.8);
+}
+
+/* Status Text */
+.status {
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+.status span {
+    color: #ffeaa7;
+    font-weight: bold;
+}
+
+.win {
+    font-size: 22px;
+    color: #00ffcc;
+    animation: glow 1s infinite alternate;
+}
+
+/* Board */
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, 95px);
+    gap: 12px;
+    margin: 20px auto;
+}
+
+/* Cells */
+.cell {
+    width: 95px;
+    height: 95px;
+    font-size: 38px;
+    font-weight: bold;
+    background: rgba(255,255,255,0.25);
+    border: none;
+    border-radius: 15px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: inset 0 0 10px rgba(255,255,255,0.3);
+}
+
+
+
+/* Button */
+.btn {
+    margin-top: 10px;
+    padding: 10px 28px;
+    border: none;
+    border-radius: 30px;
+    background: linear-gradient(135deg, #00c6ff, #0072ff);
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px #00c6ff;
+}
+
+/* Footer */
+footer {
+    margin-top: 15px;
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes glow {
+    from { text-shadow: 0 0 10px #00ffcc; }
+    to { text-shadow: 0 0 25px #00ffcc; }
+}
