@@ -1,46 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Tic Tac Toe</title>
-    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 
-<div class="glass-card">
-    <h1>❌ Tic Tac Toe ⭕</h1>
+<div class="game-panel">
 
-    {% if winner %}
-        <div class="status win">
-            {% if winner == "Draw" %}
-                🤝 It's a Draw!
-            {% else %}
-                🎉 Player {{ winner }} Wins!
-            {% endif %}
-        </div>
-    {% else %}
-        <div class="status">
-            Turn: <span>{{ current_player }}</span>
-        </div>
-    {% endif %}
+    <!-- Pause Button -->
+    <div class="header">
+        <form method="POST" action="/pause">
+            <button class="pause" type="submit">
+                {% if pause %}
+                    ▶️
+                {% else %}
+                    ⏸
+                {% endif %}
+            </button>
+        </form>
+    </div>
 
+    <!-- Board -->
     <form method="POST">
         <div class="board">
             {% for i in range(9) %}
-                <button class="cell" name="cell" value="{{ i }}"
-                        {% if winner %}disabled{% endif %}>
+                <button class="cell {{ board[i]|lower }}"
+                        name="cell"
+                        value="{{ i }}"
+                        {% if winner or pause %}disabled{% endif %}>
                     {{ board[i] }}
                 </button>
             {% endfor %}
         </div>
     </form>
 
-    <!-- Play Again button ALWAYS visible -->
-    <form method="POST" action="/reset">
-        <button class="btn">🔁 Play Again</button>
-    </form>
-</div>
+    <!-- Info -->
+    <div class="info">
+        {% if winner %}
+            {% if winner == "Draw" %}
+                DRAW
+            {% else %}
+                {{ winner }} WINS
+            {% endif %}
+        {% else %}
+            {% if pause %}
+                GAME PAUSED
+            {% else %}
+                TURN : {{ current_player }}
+            {% endif %}
+        {% endif %}
+    </div>
 
-<footer>Made with Python • Flask • HTML • CSS</footer>
+    <!-- Score -->
+   <div class="score-bar">
+        <div class="score red">❌ {{ score_x }}</div>
+        <div class="score green">⭕ {{ score_o }}</div>
+    </div>
+
+    <!-- Restart -->
+    <form method="POST" action="/reset">
+        <button class="restart">RESTART</button>
+    </form>
+
+</div>
 
 </body>
 </html>
